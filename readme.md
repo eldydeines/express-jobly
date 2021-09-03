@@ -55,4 +55,4 @@ static async findAll(filters = {})
 - [x] Test case with minEmployees and maxEmployees provided
 - [x] Test case with an invalid parameter provided
 
-See my work: [/models/company.test.js](/models/company.test.js) 
+See my work: [/models/company.test.js](/models/company.test.js) and [/routes/companies.test.js](/routes/companies.test.js) 
