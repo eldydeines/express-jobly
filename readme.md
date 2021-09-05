@@ -56,3 +56,12 @@ static async findAll(filters = {})
 - [x] Test case with an invalid parameter provided
 
 See my work: [/models/company.test.js](/models/company.test.js) and [/routes/companies.test.js](/routes/companies.test.js) 
+
+## Part Three: Permissions
+### Adding new permission routes
+- [x] Ability for only admins to access certain routes i.e. companies (new creation, updates, and deletions)
+- [x] Ability for admins to access all users, update users, delete users, and create users.
+- [x] Ability for a user to access their information only, update it and can delete themselves.
+
+See my work: [/middleware/auth.js](/middleware/auth.js) 
+Added and updated tests for these new authentication routes: [/middleware/auth.test.js](/middleware/auth.test.js), [/routes/companies.test.js](/routes/companies.test.js), and [/routes/users.test.js](/routes/users.test.js)  
