@@ -1,0 +1,50 @@
+{
+    "$id": "http://example.com/newJob.json",
+    "$schema": "http://json-schema.org/jobNew.schema.json",
+    "examples": [
+        {
+            "title": "Assistant",
+            "salary": 50000,
+            "equity": 0.056,
+            "company_handle": "jackies-realty"
+        }
+    ],
+    "required": [
+        "title",
+        "salary",
+        "equity",
+        "company_handle"
+    ],
+    "type": "object",
+    "properties": {
+        "title": {
+            "examples": [
+                "doctor"
+            ],
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+        },
+        "salary": {
+            "examples": [
+                150000
+            ],
+            "minimum": 0,
+            "type": "integer"
+        },
+        "equity": {
+            "examples": [
+                0.056
+            ],
+            "maximum": 1.0,
+            "type": "number"
+        },
+        "company_handle": {
+            "examples": [
+                "jack-rabbit"
+            ],
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

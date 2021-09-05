@@ -1,0 +1,38 @@
+{
+    "$id": "http://example.com/jobUpdate.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "examples": [
+        {
+            "title": "doctor",
+            "salary": 150000,
+            "equity": 0.056
+        }
+    ],
+    "required": [],
+    "type": "object",
+    "properties": {
+        "title": {
+            "examples": [
+                "doctor"
+            ],
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+        },
+        "salary": {
+            "examples": [
+                150000
+            ],
+            "minimum": 0,
+            "type": "integer"
+        },
+        "equity": {
+            "examples": [
+                0.056
+            ],
+            "maximum": 1.0,
+            "type": "number"
+        }
+    },
+    "additionalProperties": false
+}
