@@ -67,6 +67,7 @@ class Job {
             //will be used to match inputs with values provided for query string
             let count = 1;
 
+
             //run through the query parameters given, build strings and push to arrays
             for (let key of Object.keys(filters)) {
 
@@ -80,8 +81,8 @@ class Job {
                 }
                 else if (key == "hasEquity") {
                     filteringArray.push(`equity <> 0`);
-                    filteringValue.push(`${filters[key]}`);
                 }
+
                 else {
                     throw new BadRequestError(`Invalid filter: ${key}`);
                 }//end if.else clauses
