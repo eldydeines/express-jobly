@@ -60,7 +60,6 @@ describe("SQL For Partial Update Test", function () {
 
     test("data is good, jsSQl is bad but will still pair as requested so function does not fail", function () {
         let { setCols, values } = sqlForPartialUpdate(dataGood, jsToSQLBad);
-        console.log("TEST___________________________", setCols, values);
         expect(setCols).toBe(`\"firstname\"=$1, \"lastName\"=$2, \"email\"=$3, \"isAdmin\"=$4, \"name\"=$5, \"description\"=$6, \"num_employees\"=$7, \"logo_url\"=$8`);
     });//End Test "data is good, jsSQl is bad"
 
