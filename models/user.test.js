@@ -11,7 +11,7 @@ const {
   commonBeforeAll,
   commonBeforeEach,
   commonAfterEach,
-  commonAfterAll,
+  commonAfterAll
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);
@@ -215,7 +215,7 @@ describe("remove", function () {
   test("works", async function () {
     await User.remove("u1");
     const res = await db.query(
-        "SELECT * FROM users WHERE username='u1'");
+      "SELECT * FROM users WHERE username='u1'");
     expect(res.rows.length).toEqual(0);
   });
 
@@ -228,3 +228,52 @@ describe("remove", function () {
     }
   });
 });
+/************************************** submitApplication */
+describe("submit app", function () {
+
+  test("submission works", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["job 100"]);
+    const res = await User.submitApplication("u2", testJob.rows[0].id);
+    expect(res).toEqual({ jobId: testJob.rows[0].id });
+  });
+
+  test("submitting app, but app exists for user and job", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["job 100"]);
+
+    const result = await db.query(
+      `INSERT INTO applications
+           (username,
+            job_id)
+           VALUES ($1, $2)
+           RETURNING job_id AS "jobId"`,
+      ["u1", testJob.rows[0].id]);
+    try {
+      const res = await User.submitApplication("u1", testJob.rows[0].id);
+      fail();
+    } catch (err) {
+      expect(err).toBeTruthy();
+    }
+  });
+
+
+  test("submitting app for user, but user not found", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["job 100"]);
+    try {
+      await User.submitApplication("u5", testJob[0].id)
+      fail();
+    } catch (err) {
+      expect(err).toBeTruthy();
+    }
+  });
+
+  test("submitting app for user, but jobId not found", async function () {
+    try {
+      await User.submitApplication("u1", 0)
+      fail();
+    } catch (err) {
+      expect(err).toBeTruthy();
+    }
+  });
+
+});
+
