@@ -36,7 +36,7 @@
             "examples": [
                 0.056
             ],
-            "maximum": 1.0,
+            "maximum": 0.10,
             "type": "number"
         },
         "company_handle": {
