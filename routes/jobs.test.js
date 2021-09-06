@@ -125,7 +125,6 @@ describe("GET /jobs", function () {
 
     test("parameters testing only minSalary", async function () {
         const resp = await request(app).get(`/jobs`).query({ "minSalary": "10000" });
-        console.log("999999999999999", resp.body.jobs);
         expect(resp.body.jobs[0]).toHaveProperty("title", 'test job 1');
         expect(resp.body.jobs[0]).toHaveProperty("salary", 100000);
         expect(resp.body.jobs[0]).toHaveProperty("equity", '0.08');
@@ -135,7 +134,6 @@ describe("GET /jobs", function () {
 
     test("parameters testing only with hasEquity", async function () {
         const resp = await request(app).get(`/jobs`).query({ "hasEquity": "true" });
-        console.log("999999999999999", resp.body.jobs);
         expect(resp.body.jobs[0]).toHaveProperty("title", 'test job 1');
         expect(resp.body.jobs[0]).toHaveProperty("equity", '0.08');
         expect(resp.body.jobs[1]).toHaveProperty("title", 'test job 2');
