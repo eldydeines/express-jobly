@@ -255,7 +255,6 @@ describe("submit app", function () {
     }
   });
 
-
   test("submitting app for user, but user not found", async function () {
     let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["job 100"]);
     try {

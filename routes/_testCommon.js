@@ -83,6 +83,7 @@ async function commonBeforeAll() {
     password: "password4",
     isAdmin: true,
   });
+
 }
 
 async function commonBeforeEach() {

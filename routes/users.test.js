@@ -400,3 +400,64 @@ describe("DELETE /users/:username", function () {
     expect(resp.statusCode).toEqual(404);
   });
 });
+
+
+/************************************** POST /users/:username/jobs/:id */
+
+describe("POST /users/:username/jobs/:id", function () {
+
+  test("app submitted and works for admin", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["test job 1"]);
+    const resp = await request(app)
+      .post(`/users/u1/jobs/${testJob.rows[0].id}`)
+      .set("authorization", `Bearer ${u4Token}`);
+    expect(resp.statusCode).toEqual(200);
+  });
+
+  test("app submitted and works for specific user", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["test job 1"]);
+    const resp = await request(app)
+      .post(`/users/u1/jobs/${testJob.rows[0].id}`)
+      .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(200);
+  });
+
+  test("app submitted and does not work for other logged in users", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["test job 1"]);
+    const resp = await request(app)
+      .post(`/users/u1/jobs/${testJob.rows[0].id}`)
+      .set("authorization", `Bearer ${u2Token}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("app submitted and does not work for anon users", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["test job 1"]);
+    const resp = await request(app)
+      .post(`/users/u1/jobs/${testJob.rows[0].id}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("app not submitted if app already exists", async function () {
+    let testJob = await db.query(`SELECT title, id FROM jobs WHERE title = $1`, ["test job 1"]);
+    await db.query(`INSERT INTO applications (username, job_id) VALUES ($1,$2)`, ["u1", testJob.rows[0].id]);
+    const resp = await request(app)
+      .post(`/users/u1/jobs/${testJob.rows[0].id}`)
+      .set("authorization", `Bearer ${u4Token}`);
+    expect(resp.statusCode).toEqual(400);
+  });
+
+  test("app not submitted if user not found", async function () {
+    const resp = await request(app)
+      .post(`/users/nope/jobs/1`)
+      .set("authorization", `Bearer ${u4Token}`);
+    expect(resp.statusCode).toEqual(404);
+  });
+
+  test("app not submitted if job not found", async function () {
+    const resp = await request(app)
+      .post(`/users/u1/jobs/`)
+      .set("authorization", `Bearer ${u4Token}`);
+    expect(resp.statusCode).toEqual(404);
+  });
+
+});
