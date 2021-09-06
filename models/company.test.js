@@ -160,13 +160,9 @@ describe("findAll", function () {
 describe("get", function () {
   test("works", async function () {
     let company = await Company.get("c1");
-    expect(company).toEqual({
-      handle: "c1",
-      name: "C1",
-      description: "Desc1",
-      numEmployees: 1,
-      logoUrl: "http://c1.img",
-    });
+    expect(company).toHaveProperty("handle", "c1");
+    expect(company).toHaveProperty("name", "C1");
+    expect(company).toHaveProperty("jobs");
   });
 
   test("not found if no such company", async function () {
