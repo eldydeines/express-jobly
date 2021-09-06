@@ -65,3 +65,25 @@ See my work: [/models/company.test.js](/models/company.test.js) and [/routes/com
 
 See my work: [/middleware/auth.js](/middleware/auth.js) 
 Added and updated tests for these new authentication routes: [/middleware/auth.test.js](/middleware/auth.test.js), [/routes/companies.test.js](/routes/companies.test.js), and [/routes/users.test.js](/routes/users.test.js)  
+
+## Part Four: Jobs
+- [x] Added a new Job model that creates, updates, gets, searches, and deletes jobs with the following information title, salary, equity, and company_handle
+- [x] Added all routes for jobs with necessary authentication routes
+- [x] Created Json Schemas to be used for validation upon accessing route
+- [x] Added the ability to allow for query on request
+- [x] Added the abilty to pull all jobs associated with a company
+- [x] Tested routes
+- [x] Tested model 
+- [x] Updated test files that had relations to Jobs
+- [x] Updated app to reflect new Jobs' routes
+Main work was completed with the addition of 6 files: 
+Job Model - [/models/job.js](/models/job.js)
+Jobs Routes - [/routes/jobs.js](/routes/jobs.js) 
+Job Model Testing - [/models/job.test.js](/models/job.test.js)
+Job Routes Testing - [/routes/jobs.test.js](/routes/jobs.test.js) 
+Job Schemas - [/schemas/jobNew.json](/schemas/jobNew.json) and [/schemas/jobUpdate.json](/schemas/jobUpdate.json) 
+
+## Part Five: Job Applications
+- [x] Added in the User Model the ability for a user or an admin on behalf of a user to submit an application
+- [x] Added a new route Users' Routes the ability for a user or an admin on behalf of a user to submit an application by accepting parameters in route path
+- [x] Added tests to User Model test and User Routes test files.=
